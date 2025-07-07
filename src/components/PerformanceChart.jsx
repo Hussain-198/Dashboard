@@ -39,7 +39,7 @@ export default function PerformanceChart() {
             <Legend />
             <Line
               type="monotone"
-              dataKey="thisMonth"
+              dataKey="lastMonth"
               stroke="#3B82F6"
               strokeWidth={3}
               dot={{ r: 4 }}
