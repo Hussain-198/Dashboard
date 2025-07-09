@@ -13,8 +13,7 @@ import {
 } from "react-icons/fi";
 import { FaStar } from "react-icons/fa";
 
-function Sidebar() {
-  const [isOpen, setIsOpen] = useState(false);
+function Sidebar({ isOpen, setIsOpen }) {
   const [activeIndex, setActiveIndex] = useState(-1);
 
   const menuitems = [
@@ -29,7 +28,7 @@ function Sidebar() {
     <motion.aside
       initial={{ width: 80 }}
       animate={{ width: isOpen ? 220 : 80 }}
-      className="bg-white border-r border-gray-200 flex flex-col justify-between shadow-sm"
+      className="fixed h-full bg-white border-r border-gray-200 flex flex-col justify-between shadow-sm"
     >
       <div className="flex flex-col h-full justify-between">
         {/* logo */}
