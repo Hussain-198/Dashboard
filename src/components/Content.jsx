@@ -1,11 +1,11 @@
 import { FiCalendar } from "react-icons/fi";
 import { ThumbsUp, Timer, TrendingUp, Triangle } from "lucide-react";
 
-function Content() {
+function Content({theme, setTheme}) {
   return (
     <div className="w-full ">
       {/* name */}
-      <div className="w-full flex justify-between py-10 border-b border-gray-200">
+      <div className={`w-full flex justify-between py-10 border-b ${theme == "dark" ?"border-zinc-800" :"border-gray-200"}`}>
         <div className="flex flex-col gap-3">
           <h1 className="text-4xl font-sans">Hello, Margaret</h1>
           <p className="text-gray-400">
@@ -18,17 +18,17 @@ function Content() {
             <div>
               <FiCalendar
                 size={40}
-                className="bg-gray-200 px-2 py-2 rounded-4xl"
+                className={`bg-gray-200 px-2 py-2 rounded-4xl text-black`}
               />
             </div>
           </div>
         </div>
       </div>
       {/* track */}
-      <div className="flex justify-between py-5 border-b border-gray-200">
+      <div className={`flex justify-between py-5 border-b ${theme == "dark" ?"border-zinc-800" :"border-gray-200"}`}>
         <div className="flex items-center justify-center gap-4">
           <div>
-            <ThumbsUp size={40} className="bg-gray-100 rounded-full px-2" />
+            <ThumbsUp size={40} className="bg-gray-100 rounded-full px-2 text-black" />
           </div>
           <div>
             <span>
@@ -43,10 +43,10 @@ function Content() {
             </span>
           </div>
         </div>
-        <div className="border border-gray-200" /> {/*divider*/}
+        <div className={`border ${theme == "dark" ?"border-zinc-800" :"border-gray-200"}`}/> {/*divider*/}
         <div className="flex items-center gap-4">
           <div>
-            <Timer size={40} className="bg-gray-100 rounded-full px-2" />
+            <Timer size={40} className="bg-gray-100 rounded-full px-2 text-black" />
           </div>
           <div>
             <span>
@@ -61,10 +61,10 @@ function Content() {
             </span>
           </div>
         </div>
-        <div className="border border-gray-200" /> {/*divider*/}
+        <div className={`border ${theme == "dark" ?"border-zinc-800" :"border-gray-200"}`} /> {/*divider*/}
         <div className="flex items-center gap-4">
           <div>
-            <TrendingUp size={40} className="bg-gray-100 rounded-full px-2" />
+            <TrendingUp size={40} className="bg-gray-100 rounded-full px-2 text-black" />
           </div>
           <div>
             <span>

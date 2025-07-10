@@ -25,11 +25,11 @@ export default function PerformanceChart() {
     <div className="w-full mt-8">
       <div className="flex justify-between items-center">
         <h2 className="text-xl font-semibold mb-4">Performance</h2>
-        <h5 className="text-xs font-extralight bg-zinc-100 rounded-2xl py-2 px-2 flex items-center gap-1 hover:cursor-pointer">
+        <h5 className="text-xs font-extralight border border-zinc-500 rounded-2xl py-2 px-2 flex items-center gap-1 hover:cursor-pointer">
           01-07 May <ChevronDown className="w-4 h-4" />
         </h5>
       </div>
-      <div className="bg-white rounded-lg p-6 shadow">
+      <div className="rounded-lg p-6 shadow">
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={data}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} />
