@@ -10,10 +10,12 @@ import {
   FiChevronRight,
   FiInfo,
   FiMinusCircle,
+  FiMoon,
+  FiSun,
 } from "react-icons/fi";
-import { FaStar } from "react-icons/fa";
+import { FaStar, FaSun, FaMoon } from "react-icons/fa";
 
-function Sidebar({ isOpen, setIsOpen }) {
+function Sidebar({ isOpen, setIsOpen, theme, setTheme }) {
   const [activeIndex, setActiveIndex] = useState(-1);
 
   const menuitems = [
@@ -28,7 +30,11 @@ function Sidebar({ isOpen, setIsOpen }) {
     <motion.aside
       initial={{ width: 80 }}
       animate={{ width: isOpen ? 220 : 80 }}
-      className="fixed h-full bg-white border-r border-gray-200 flex flex-col justify-between shadow-sm"
+      className={`fixed h-full  border-r  flex flex-col justify-between shadow-sm ${
+        theme === "dark"
+          ? "bg-black border-gray-200"
+          : "bg-white border-gray-200"
+      }`}
     >
       <div className="flex flex-col h-full justify-between">
         {/* logo */}
@@ -51,7 +57,9 @@ function Sidebar({ isOpen, setIsOpen }) {
             onClick={() => {
               setIsOpen((prev) => !prev);
             }}
-            className="bg-zinc-200 rounded-md hover:cursor-pointer"
+            className={`${
+              theme == "dark" ? "bg-zinc-800" : "bg-zinc-200"
+            } rounded-md hover:cursor-pointer`}
           >
             {isOpen ? <FiChevronLeft /> : <FiChevronRight />}
           </button>
@@ -63,7 +71,9 @@ function Sidebar({ isOpen, setIsOpen }) {
               <button
                 key={item.label}
                 onClick={() => setActiveIndex(idx)}
-                className={`flex items-center px-6 py-2 rounded-lg transition-colors duration-200 group hover:cursor-pointer hover:bg-gray-100 hover:text-white ${
+                className={`flex items-center px-6 py-2 rounded-lg transition-colors duration-200 group hover:cursor-pointer ${
+                  theme == "dark" ? "hover:bg-zinc-800" : "hover:bg-gray-100"
+                } hover:text-white ${
                   isActive ? "bg-gray-100" : "bg-transparent"
                 }`}
               >
@@ -97,7 +107,11 @@ function Sidebar({ isOpen, setIsOpen }) {
                 )}
 
                 {isOpen && (idx === 1 || idx === 2) && (
-                  <span className="ml-auto flex items-center justify-center w-7 h-7 rounded-full bg-gray-100">
+                  <span
+                    className={`ml-auto flex items-end justify-center w-6 h-6 rounded-full ${
+                      theme == "dark" ? "bg-zinc-800" : "bg-gray-100"
+                    }`}
+                  >
                     <span className="text-gray-400 text-lg font-bold">+</span>
                   </span>
                 )}
@@ -106,7 +120,13 @@ function Sidebar({ isOpen, setIsOpen }) {
           })}
         </nav>
         {/* pro */}
-        <div className="bg-gradient-to-b from-zinc-200 to-white rounded-2xl mx-3">
+        <div
+          className={` rounded-2xl mx-3 ${
+            theme == "dark"
+              ? "bg-gradient-to-b from-zinc-800 to-black"
+              : "bg-gradient-to-b from-zinc-200 to-white"
+          }`}
+        >
           <div className="flex flex-col justify-center items-center py-2 px-2">
             {isOpen ? (
               <>
@@ -114,7 +134,7 @@ function Sidebar({ isOpen, setIsOpen }) {
                 <span className="text-xs text-gray-500 mt-1 mb-2 text-center">
                   Get 1 month free and unlock
                 </span>
-                <button className="bg-blue-200 text-blue-900 px-4 py-1 rounded-full font-semibold text-sm">
+                <button className="bg-blue-200 text-blue-900 px-4 py-1 rounded-full font-semibold text-sm hover:cursor-pointer">
                   Upgrade
                 </button>
               </>
@@ -125,11 +145,49 @@ function Sidebar({ isOpen, setIsOpen }) {
             )}
           </div>
         </div>
+        <div>
+          {isOpen ? (
+            <div className="flex flex-col text-gray-400 gap-2">
+              <button
+                className={`flex gap-5 pl-5 py-2 rounded-lg ${
+                  theme == "dark" ? "hover:bg-zinc-800" : "hover:bg-gray-200"
+                } hover:cursor-pointer items-center`}
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              >
+                {theme === "dark" ? (
+                  <FaSun className="text-yellow-400" size={24} />
+                ) : (
+                  <FaMoon className="text-black" size={24} />
+                )}
+                <p>{theme === "dark" ? "Light" : "Dark"}</p>
+              </button>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center justify-center   gap-5">
+              <button
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className={`flex w-full justify-center rounded-lg ${
+                  theme == "dark" ? "hover:bg-zinc-800" : "hover:bg-gray-200"
+                } py-2 hover:cursor-pointer`}
+              >
+                {theme == "dark" ? (
+                  <FaSun className="text-yellow-400" size={24} />
+                ) : (
+                  <FaMoon className="text-black" size={24} />
+                )}
+              </button>
+            </div>
+          )}
+        </div>
         {/* footer */}
         <div className="flex flex-col gap-4">
           {isOpen ? (
             <>
-              <div className="flex pl-5 py-2 rounded-lg hover:bg-gray-100 hover:cursor-pointer">
+              <div
+                className={`flex pl-5 py-2 rounded-lg ${
+                  theme == "dark" ? "hover:bg-zinc-800" : "hover:bg-gray-100"
+                } hover:cursor-pointer`}
+              >
                 <span className="mr-4">
                   <FiInfo
                     size={24}
@@ -142,7 +200,11 @@ function Sidebar({ isOpen, setIsOpen }) {
               </div>
             </>
           ) : (
-            <span className="mr-1 py-2 rounded-lg hover:bg-gray-100">
+            <span
+              className={`mr-1 py-2 rounded-lg ${
+                theme == "dark" ? "hover:bg-zinc-800" : "hover:bg-gray-100"
+              }`}
+            >
               <FiInfo
                 size={24}
                 className="flex items-center justify-center rounded-full border-gray-400 text-gray-400 w-full hover:cursor-pointer"
@@ -151,7 +213,11 @@ function Sidebar({ isOpen, setIsOpen }) {
           )}
           {isOpen ? (
             <>
-              <div className="flex pl-5 hover:bg-gray-100 rounded-lg py-2 hover:cursor-pointer">
+              <div
+                className={`flex pl-5 py-2 rounded-lg ${
+                  theme == "dark" ? "hover:bg-zinc-800" : "hover:bg-gray-100"
+                } hover:cursor-pointer`}
+              >
                 <span className="mr-4">
                   <FiMinusCircle
                     size={24}
@@ -162,7 +228,11 @@ function Sidebar({ isOpen, setIsOpen }) {
               </div>
             </>
           ) : (
-            <span className=" hover:bg-gray-100 rounded-lg py-2 hover:cursor-pointer">
+            <span
+              className={`rounded-lg py-2 hover:cursor-pointer ${
+                theme == "dark" ? "hover:bg-zinc-800" : "hover:bg-gray-100"
+              }`}
+            >
               <FiMinusCircle
                 size={24}
                 className="text-gray-400 mr-4 pr-1 flex justify-center w-full"

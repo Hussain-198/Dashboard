@@ -57,7 +57,7 @@ const activities = [
   },
 ];
 
-function AppDrawer() {
+function AppDrawer({ theme, setTheme }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -77,11 +77,13 @@ function AppDrawer() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed top-0 right-0 h-full w-100 bg-white shadow-2xl z-50 flex flex-col"
+            className={`fixed top-0 right-0 h-full w-100 ${
+              theme === "dark" ? "bg-black" : "bg-white"
+            } shadow-2xl z-50 flex flex-col`}
           >
             {/* close button */}
             <button
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-500"
               onClick={() => setIsOpen(false)}
               aria-label="Close drawer"
             >
@@ -90,41 +92,69 @@ function AppDrawer() {
             <div className="flex flex-col justify-between h-screen">
               <div>
                 {/* profile */}
-                <div className="flex flex-col items-center bg-gray-50 pt-10 pb-6 rounded-xl m-3">
+                <div
+                  className={`flex flex-col items-center ${
+                    theme == "dark" ? "bg-zinc-900" : "bg-gray-50"
+                  } pt-10 pb-6 rounded-xl m-3`}
+                >
                   <div className="relative">
                     <img
                       src="https://randomuser.me/api/portraits/women/65.jpg"
                       alt="Megan Norton"
-                      className="w-20 h-20 rounded-full border-4 border-white shadow"
+                      className={`w-20 h-20 rounded-full border-4 ${theme == "dark" ?"border-black":"border-white"} shadow`}
                     />
-                    <span className="absolute bottom-2 right-2 w-4 h-4 bg-green-400 border-2 border-white rounded-full"></span>
+                    <span className={`absolute bottom-2 right-2 w-4 h-4 bg-green-400 border-2 ${theme == "dark"? "border-black":"border-white"}  rounded-full`}></span>
                   </div>
                   <div className="mt-3 text-center">
                     <div className="font-semibold text-lg">Megan Norton</div>
                     <div className="text-gray-400 text-sm">@megnorton</div>
                   </div>
                   <div className="flex gap-4 mt-4">
-                    <button className="bg-white p-2 rounded-full shadow hover:bg-gray-100 hover:cursor-pointer">
+                    <button
+                      className={`${
+                        theme == "dark" ? "bg-zinc-800" : "bg-white"
+                      } p-2 rounded-full shadow hover:bg-gray-100 hover:cursor-pointer`}
+                    >
                       <FiPhone className="h-5 w-5 text-gray-500" />
                     </button>
-                    <button className="bg-white p-2 rounded-full shadow hover:bg-gray-100 hover:cursor-pointer">
+                    <button
+                      className={`${
+                        theme == "dark" ? "bg-zinc-800" : "bg-white"
+                      } p-2 rounded-full shadow hover:bg-gray-100 hover:cursor-pointer`}
+                    >
                       <FiVideo className="h-5 w-5 text-gray-500" />
                     </button>
-                    <button className="bg-white p-2 rounded-full shadow hover:bg-gray-100 hover:cursor-pointer">
+                    <button
+                      className={`${
+                        theme == "dark" ? "bg-zinc-800" : "bg-white"
+                      } p-2 rounded-full shadow hover:bg-gray-100 hover:cursor-pointer`}
+                    >
                       <FiMoreVertical className="h-5 w-5 text-gray-500" />
                     </button>
                   </div>
                 </div>
                 {/* activity */}
                 <div className="flex items-center w-full my-4 px-4">
-                  <div className="flex-1 h-px bg-gray-200" />
-                  <span className="mx-2 text-gray-700 font-semibold text-sm whitespace-nowrap">
+                  <div
+                    className={`flex-1 h-px ${
+                      theme == "dark" ? "bg-zinc-800" : "bg-gray-200"
+                    }`}
+                  />
+                  <span
+                    className={`mx-2 ${
+                      theme == "dark" ? "text-zinc-400" : "text-gray-700"
+                    }  font-semibold text-sm whitespace-nowrap`}
+                  >
                     Activity
                   </span>
-                  <div className="flex-1 h-px bg-gray-200" />
+                  <div
+                    className={`flex-1 h-px ${
+                      theme == "dark" ? "bg-zinc-800" : "bg-gray-200"
+                    }`}
+                  />
                 </div>
                 {/* messages */}
-                <div className="flex-1 overflow-y-auto px-4 py-6 bg-white">
+                <div className="flex-1 overflow-y-auto px-4 py-6">
                   <div className="space-y-6">
                     {activities.map((activity) => (
                       <div key={activity.id} className="flex items-start gap-3">
@@ -136,7 +166,7 @@ function AppDrawer() {
                         <div className="flex-1">
                           <div className="flex flex-col gap-1 text-sm">
                             <div className="flex justify-between">
-                              <span className="font-semibold text-gray-800">
+                              <span className="font-semibold">
                                 {activity.user.name}
                               </span>
                               <span className="text-gray-400 font-light text-xs">
@@ -186,7 +216,7 @@ function AppDrawer() {
               </div>
               {/* message input */}
               <div>
-                <div className=" bg-white px-4 py-3">
+                <div className="px-4 py-3">
                   <div className="flex items-center gap-2">
                     <div className="relative flex-1">
                       <span className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center gap-2 text-gray-400 hover:rounded-full hover:bg-zinc-200 px-2 py-2">
@@ -195,7 +225,9 @@ function AppDrawer() {
                       <input
                         type="text"
                         placeholder="Write a message"
-                        className="w-full h-12 pl-14 pr-4 rounded-xl bg-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-200 text-sm placeholder-gray-400 font-medium"
+                        className={`w-full h-12  pl-14 pr-4 rounded-xl ${
+                          theme == "dark" ? "bg-zinc-800" : "bg-zinc-100 "
+                        } focus:outline-none focus:ring-2 focus:ring-blue-200 text-sm placeholder-gray-400 font-medium`}
                       />
                       <span className="absolute right-11 top-1/2 -translate-y-1/2 flex items-center gap-2 text-gray-400 hover:rounded-full hover:bg-zinc-200 px-2 py-2">
                         <Smile className="w-5 h-5" />
