@@ -14,6 +14,8 @@ import {
   FiSun,
 } from "react-icons/fi";
 import { FaStar, FaSun, FaMoon } from "react-icons/fa";
+import Logiplogo from "../../src/assets/images/Logiplogo.png";
+import Logo from "../../src/assets/images/logo.png";
 
 function Sidebar({ isOpen, setIsOpen, theme, setTheme }) {
   const [activeIndex, setActiveIndex] = useState(-1);
@@ -42,13 +44,13 @@ function Sidebar({ isOpen, setIsOpen, theme, setTheme }) {
           {isOpen ? (
             <img
               className="w-20"
-              src="../../src/assets/images/Logiplogo.png"
+              src={Logiplogo}
               alt="Logip"
             />
           ) : (
             <img
               className="w-20"
-              src="../../src/assets/images/logo.png"
+              src={Logo}
               alt="logo"
             />
           )}
